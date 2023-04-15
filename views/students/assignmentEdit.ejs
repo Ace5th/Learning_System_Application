@@ -1,0 +1,41 @@
+<% layout("layouts/boilerplateStudents") %>
+
+    <h1 class="page-title">
+        ASSIGNMENT: <%= assignment.title %>
+    </h1>
+
+    <div class="row mt-5">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow mb-3 py-2">
+                <h2 class="ps-3">Update Below</h2>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <form action="/student/assignment/<%= assignment._id %>/edit-assignment?_method=PUT" method="POST"
+                        class="validated-form" enctype="multipart/form-data" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label h5" for="title">Title</label>
+                            <input class="form-control" type="text" name="assignment[title]" id="title"
+                                placeholder="Title" value="<%=assignment.title%>" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label h5">Add a PDF</label>
+                            <input class="form-control" type="file" id="content" name="content" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-secondary">Update Assignment</button>
+                        </div>
+                    </form>
+                    <a class="btn btn-sm btn-secondary mt-3 mx-3"
+                        href="/student/assignment/<%= assignment._id %>">&larr;
+                        Previous Page</a>
+                </div>
+            </div>
+        </div>
+    </div>

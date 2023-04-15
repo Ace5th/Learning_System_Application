@@ -1,0 +1,44 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title">
+        Setting
+    </h1>
+
+    <div class="row mt-5">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow mb-3 py-2 text-bg-dark">
+                <h2 class="ps-3">My Profile</h2>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <label class="h5" for="username">NIM</label>
+                    <div class="card p-2 mb-3">
+                        <p class="card-text mb-0" id="username">
+                            <%= admin.username %>
+                        </p>
+                    </div>
+                    <label class="h5" for="name">Name</label>
+                    <div class="card p-2 mb-3">
+                        <p class="card-text mb-0" id="name">
+                            <%= admin.name %>
+                        </p>
+                    </div>
+                    <label class="h5" for="email">E-mail</label>
+                    <div class="card p-2 mb-1">
+                        <p class="card-text mb-0" id="email">
+                            <%= admin.email %>
+                        </p>
+                    </div>
+                    <label class="h5" for="department">Department</label>
+                    <div class="card p-2 mb-1">
+                        <p class="card-text mb-0" id="department">
+                            <%= admin.department %>
+                        </p>
+                    </div>
+                    <a class="btn btn-sm btn-secondary mt-3 mx-1" href="/admin/setting/profile">Edit Profile</a>
+                    <a class="btn btn-sm btn-secondary mt-3 mx-1" href="/admin/setting/profile/edit-password">Change
+                        Password</a>
+                </div>
+            </div>
+        </div>
+    </div>

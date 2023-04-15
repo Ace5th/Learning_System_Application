@@ -1,0 +1,79 @@
+<% layout("layouts/boilerplateStudents") %>
+
+    <h1 class="page-title">
+        <%= assignment.title %>
+    </h1>
+    <a href="/student" class="btn btn-sm btn-secondary mb-2">&larr; Previous Page</a>
+
+    <div class="row mt-5">
+        <h4>History</h4>
+    </div>
+
+    <table class="table table-striped-columns">
+        <thead>
+            <tr>
+                <th scope="col">TIME CREATED</th>
+                <th scope="col">DETAIL</th>
+                <th scope="col" colspan="2">STATUS</th>
+                <th scope="col">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let history of assignment.histories) { %>
+
+                <tr>
+                    <th scope="row">
+                        <%= history.createdOn.toLocaleDateString() %>
+                    </th>
+                    <td>
+                        <%= history.detail %>
+                    </td>
+                    <td>
+                        <%= history.status %>
+                    </td>
+                    <td>
+                        <ul>
+                            <% if (student.firstLecturer !=undefined) { %>
+                                <li>
+                                    <strong>1<sup>ST</sup> SUPERVISOR:</strong> <br>
+                                    <strong>
+                                        <%= history.statusOfFirstLecturer.code %>
+                                    </strong> | <%= student.firstLecturer.username %> |
+                                        <%= student.firstLecturer.name %> | <%= student.firstLecturer.department %>
+                                </li>
+                                <% } %>
+                                    <% if (student.secondLecturer !=undefined) { %>
+                                        <li>
+                                            <strong>2<sup>ND</sup> SUPERVISOR:</strong> <br>
+                                            <strong>
+                                                <%= history.statusOfSecondLecturer.code %>
+                                            </strong> | <%= student.secondLecturer.username %> |
+                                                <%= student.secondLecturer.name %> | <%=
+                                                        student.secondLecturer.department %>
+                                        </li>
+                                        <% } %>
+                        </ul>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                &#8226;&#8226;&#8226;
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <% if (history.content) { %>
+                                <li><a class="dropdown-item"
+                                        href="/student/download-history/<%= history._id %>">Download
+                                        PDF</a>
+                                </li>
+                                <% } %> 
+                                <li><a class="dropdown-item"
+                                        href="/student/assignment/<%= assignment._id %>/history/<%= history._id %>">Detail</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>

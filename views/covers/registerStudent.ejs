@@ -1,0 +1,72 @@
+<% layout("layouts/boilerplateCovers") %>
+
+    <div class="container d-flex justify-content-center align-items-center my-5">
+        <div class="row">
+            <div class="col-md-6 col-xl-4">
+                <div class="card shadow login-card">
+                    <div class="login-logo">
+                        <img class="card-img-top"
+                            src="https://kompaspedia.kompas.id/wp-content/uploads/2020/08/logo_Universitas-Hasanudin.png"
+                            alt="">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="text-center">Student Registration</h5>
+                        <form action="/register-student" method="POST" class="mb-4 validated-form" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label" for="username">NIM</label>
+                                <input class="form-control" type="text" id="username" name="student[username]" autofocus
+                                    required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="password">PASSWORD</label>
+                                <input class="form-control" type="password" id="password" name="student[password]"
+                                    required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="name">FULL NAME</label>
+                                <input class="form-control" type="text" id="name" name="student[name]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="email">E-MAIL</label>
+                                <input class="form-control" type="email" id="email" name="student[email]" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="phone-number">PHONE NUMBER</label>
+                                <input class="form-control" type="text" id="phone-number" name="student[phoneNumber]"
+                                    required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="department">DEPARTMENT</label>
+                                <select class="form-select" id="department" name="student[department]">
+                                    <option selected>Choose...</option>
+                                    <% for (let department of departments) { %>
+                                        <option value="<%= department %>">
+                                            <%= department %>
+                                        </option>
+                                        <% } %>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <button class="btn btn-success btn-block">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>

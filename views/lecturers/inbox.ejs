@@ -1,0 +1,261 @@
+<% layout("layouts/boilerplateLecturers") %>
+
+    <h1 class="page-title">
+        Assignments Inbox
+    </h1>
+
+    <table class="table table-striped-columns mt-4">
+        <thead>
+            <tr>
+                <th scope="col">TITLE</th>
+                <th scope="col">PHASE</th>
+                <th scope="col">STATUS</th>
+                <th scope="col" colspan="2">AUTHOR</th>
+                <th scope="col">SUPERVISORS</th>
+                <th scope="col">TIME UPDATED</th>
+                <th scope="col">DEADLINE</th>
+                <th scope="col">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let assignment of pendingAssignmentsMe) { %>
+                <tr>
+                    <th scope="row">
+                        <%= assignment.title %>
+                    </th>
+                    <td>
+                        <%= assignment.phase %>
+                    </td>
+                    <td>
+                        <%= assignment.status %>
+                    </td>
+                    <td>
+                        <%= assignment.author.username %> | <%= assignment.author.name %> | <%=
+                                    assignment.author.department %>
+                    </td>
+                    <td>
+                        <%= assignment.author.email %>
+                    </td>
+                    <td>
+                        <ul>
+                            <% if (assignment.author.firstLecturer !=undefined) { %>
+                                <li>
+                                    <strong>1<sup>ST</sup> SUPERVISOR:</strong> <br>
+                                    <strong>
+                                        <%= assignment.statusOfFirstLecturer.code %>
+                                    </strong> |
+                                    <%= assignment.author.firstLecturer.username %> |
+                                        <%= assignment.author.firstLecturer.name %> | <%=
+                                                assignment.author.firstLecturer.department %>
+                                </li>
+                                <% } %>
+                                    <% if (assignment.author.secondLecturer !=undefined) { %>
+                                        <li>
+                                            <strong>2<sup>ND</sup> SUPERVISOR:</strong> <br>
+                                            <strong>
+                                                <%= assignment.statusOfSecondLecturer.code %>
+                                            </strong> |
+                                            <%= assignment.author.secondLecturer.username %> |
+                                                <%= assignment.author.secondLecturer.name %> | <%=
+                                                        assignment.author.secondLecturer.department %>
+                                        </li>
+                                        <% } %>
+                        </ul>
+                    </td>
+                    <td>
+                        <%= assignment.time.updatedOn.toLocaleDateString() %>
+                    </td>
+                    <td>
+                        <% if (assignment.status=="Under Review by Lecturers" ) { %>
+                            Lecturer(s) |
+                            <% } else { %>
+                                Student |
+                                <% } %>
+                                    <%= assignment.time.expiresOn.toLocaleDateString() %> <strong>(<%=
+                                                assignment.elapsedTimeDay %> Days
+                                                Left)</strong>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                &#8226;&#8226;&#8226;
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item"
+                                        href="/lecturer/student/<%= assignment.author._id %>/assignment/<%= assignment._id %>/accept-assignment">Accept
+                                        Assignment</a>
+                                </li>
+                                <% if
+                                    ((assignment.statusOfFirstLecturer.lecturer._id.toHexString()==lecturer._id.toHexString()
+                                    && assignment.statusOfFirstLecturer.code!="Reviewed" ) ||
+                                    (assignment.statusOfSecondLecturer.lecturer._id.toHexString()==lecturer._id.toHexString()
+                                    && assignment.statusOfSecondLecturer.code!="Reviewed" )) { %>
+                                    <li><a class="dropdown-item"
+                                            href="/lecturer/student/<%= assignment.author._id %>/assignment/<%= assignment._id %>/review/add-review">Give
+                                            Review</a>
+                                    </li>
+                                    <% } %>
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/download-assignment/<%= assignment._id %>">Download
+                                                PDF</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/inbox/student/<%= assignment.author._id %>/assignment/<%= assignment._id %>">Detail</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/inbox/student/<%= assignment.author._id %>/assignment/<%= assignment._id %>/reviews">Reviews</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/inbox/student/<%= assignment.author._id %>/assignment/<%= assignment._id %>/history">History</a>
+                                        </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+                    <% for (let assignment of pendingAssignmentsOthers) { %>
+                        <tr>
+                            <th scope="row">
+                                <%= assignment.title %>
+                            </th>
+                            <td>
+                                <%= assignment.phase %>
+                            </td>
+                            <td>
+                                <%= assignment.status %>
+                            </td>
+                            <td>
+                                <%= assignment.author.username %> | <%= assignment.author.name %> | <%=
+                                            assignment.author.department %>
+                            </td>
+                            <td>
+                                <%= assignment.author.email %>
+                            </td>
+                            <td>
+                                <ul>
+                                    <% if (assignment.author.firstLecturer !=undefined) { %>
+                                        <li>
+                                            <strong>1<sup>ST</sup> SUPERVISOR:</strong> <br>
+                                            <strong>
+                                                <%= assignment.statusOfFirstLecturer.code %>
+                                            </strong> |
+                                            <%= assignment.author.firstLecturer.username %> |
+                                                <%= assignment.author.firstLecturer.name %> | <%=
+                                                        assignment.author.firstLecturer.department %>
+                                        </li>
+                                        <% } %>
+                                            <% if (assignment.author.secondLecturer !=undefined) { %>
+                                                <li>
+                                                    <strong>2<sup>ND</sup> SUPERVISOR:</strong> <br>
+                                                    <strong>
+                                                        <%= assignment.statusOfSecondLecturer.code %>
+                                                    </strong> |
+                                                    <%= assignment.author.secondLecturer.username %> |
+                                                        <%= assignment.author.secondLecturer.name %> | <%=
+                                                                assignment.author.secondLecturer.department %>
+                                                </li>
+                                                <% } %>
+                                </ul>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        &#8226;&#8226;&#8226;
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/student/<%= assignment.author._id %>/assignment/<%= assignment._id %>/accept-assignment">Accept
+                                                Assignment</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/download-assignment/<%= assignment._id %>">Download
+                                                PDF</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/inbox/student/<%= assignment.author._id %>/assignment/<%= assignment._id %>">Detail</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/inbox/student/<%= assignment.author._id %>/assignment/<%= assignment._id %>/reviews">Reviews</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/inbox/student/<%= assignment.author._id %>/assignment/<%= assignment._id %>/history">History</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <% } %>
+                            <% for (let assignment of reviewedAssignments) { %>
+                                <tr>
+                                    <th scope="row">
+                                        <%= assignment.title %>
+                                    </th>
+                                    <td>
+                                        <%= assignment.phase %>
+                                    </td>
+                                    <td>
+                                        <%= assignment.status %>
+                                    </td>
+                                    <td>
+                                        <%= assignment.author.username %> | <%= assignment.author.name %> | <%=
+                                                    assignment.author.department %>
+                                    </td>
+                                    <td>
+                                        <%= assignment.author.email %>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <% if (assignment.author.firstLecturer !=undefined) { %>
+                                                <li>
+                                                    <strong>1<sup>ST</sup> SUPERVISOR:</strong> <br>
+                                                    <strong>
+                                                        <%= assignment.statusOfFirstLecturer.code %>
+                                                    </strong> |
+                                                    <%= assignment.author.firstLecturer.username %> |
+                                                        <%= assignment.author.firstLecturer.name %> | <%=
+                                                                assignment.author.firstLecturer.department %>
+                                                </li>
+                                                <% } %>
+                                                    <% if (assignment.author.secondLecturer !=undefined) { %>
+                                                        <li>
+                                                            <strong>2<sup>ND</sup> SUPERVISOR:</strong> <br>
+                                                            <strong>
+                                                                <%= assignment.statusOfSecondLecturer.code %>
+                                                            </strong> |
+                                                            <%= assignment.author.secondLecturer.username %> |
+                                                                <%= assignment.author.secondLecturer.name %> | <%=
+                                                                        assignment.author.secondLecturer.department %>
+                                                        </li>
+                                                        <% } %>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                &#8226;&#8226;&#8226;
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-dark">
+                                                <li><a class="dropdown-item"
+                                                        href="/lecturer/download-assignment/<%= assignment._id %>">Download
+                                                        PDF</a>
+                                                </li>
+                                                <li><a class="dropdown-item"
+                                                        href="/lecturer/inbox/student/<%= assignment.author._id %>/assignment/<%= assignment._id %>">Detail</a>
+                                                </li>
+                                                <li><a class="dropdown-item"
+                                                        href="/lecturer/inbox/student/<%= assignment.author._id %>/assignment/<%= assignment._id %>/reviews">Reviews</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                        href="/lecturer/inbox/student/<%= assignment.author._id %>/assignment/<%= assignment._id %>/history">History</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% } %>
+        </tbody>
+    </table>

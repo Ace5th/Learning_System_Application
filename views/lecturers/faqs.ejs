@@ -1,0 +1,55 @@
+<% layout("layouts/boilerplateLecturers") %>
+
+    <h1 class="page-title display-1">FAQS</h1>
+
+    <div class="page-body mb-4">
+        <% for(let i=0; i < faqs.length; i++) {%>
+            <div class="faqs mb-2">
+                <div class="card card-body p-0">
+                    <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#faq<%= i %>"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        <h5 class="text-start">
+                            <%= i+1 %>.
+                                <%= faqs[i].title %>
+                        </h5>
+                    </button>
+                </div>
+
+                <div class="collapse" id="faq<%= i %>">
+                    <div class="card card-body mt-1">
+                        <% if (faqs[i].files!=undefined) { %>
+                            <div class="row">
+                                <div class="col-6 offset-3">
+                                    <div id="faqCarousel" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <% faqs[i].files.forEach((img, x)=> { %>
+                                                <div class="carousel-item <%= x === 0 ? 'active' : ''%> ">
+                                                    <img class="d-block w-100" src="<%= img.url %> " alt="">
+                                                </div>
+                                                <% }) %>
+                                        </div>
+                                        <% if(faqs[i].files.length> 1) {%>
+                                            <a class="carousel-control-prev" href="#faqCarousel" role="button"
+                                                data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only"></span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#faqCarousel" role="button"
+                                                data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only"></span>
+                                            </a>
+                                            <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <% } %>
+                                <p>
+                                    <%= faqs[i].content %>
+                                </p>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+    </div>

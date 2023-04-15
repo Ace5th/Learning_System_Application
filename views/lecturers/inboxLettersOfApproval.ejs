@@ -1,0 +1,160 @@
+<% layout("layouts/boilerplateLecturers") %>
+
+    <h1 class="page-title">
+        Letters of Approval Inbox
+    </h1>
+
+    <table class="table table-striped-columns mt-4">
+        <thead>
+            <tr>
+                <th scope="col">STATUS</th>
+                <th scope="col" colspan="2">AUTHOR</th>
+                <th scope="col">SUPERVISORS</th>
+                <th scope="col">TIME UPDATED</th>
+                <th scope="col">DEADLINE</th>
+                <th scope="col">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let letterOfApproval of pendingLettersOfApprovalMe) { %>
+                <tr>
+                    <th scope="row">
+                        <%= letterOfApproval.status %>
+                    </th>
+                    <td>
+                        <%= letterOfApproval.author.username %> | <%= letterOfApproval.author.name %> | <%=
+                                    letterOfApproval.author.department %>
+                    </td>
+                    <td>
+                        <%= letterOfApproval.author.email %>
+                    </td>
+                    <td>
+                        <ul>
+                            <% if (letterOfApproval.author.firstLecturer !=undefined) { %>
+                                <li>
+                                    <strong>1<sup>ST</sup> SUPERVISOR:</strong> <br>
+                                    <strong>
+                                        <%= letterOfApproval.statusOfFirstLecturer.code %>
+                                    </strong> |
+                                    <%= letterOfApproval.author.firstLecturer.username %> |
+                                        <%= letterOfApproval.author.firstLecturer.name %> | <%=
+                                                letterOfApproval.author.firstLecturer.department %>
+                                </li>
+                                <% } %>
+                                    <% if (letterOfApproval.author.secondLecturer !=undefined) { %>
+                                        <li>
+                                            <strong>2<sup>ND</sup> SUPERVISOR:</strong> <br>
+                                            <strong>
+                                                <%= letterOfApproval.statusOfSecondLecturer.code %>
+                                            </strong> |
+                                            <%= letterOfApproval.author.secondLecturer.username %> |
+                                                <%= letterOfApproval.author.secondLecturer.name %> | <%=
+                                                        letterOfApproval.author.secondLecturer.department %>
+                                        </li>
+                                        <% } %>
+                        </ul>
+                    </td>
+                    <td>
+                        <%= letterOfApproval.time.updatedOn.toLocaleDateString() %>
+                    </td>
+                    <td>
+                        <% if (letterOfApproval.status=="Waiting for Approval" ) { %>
+                            Lecturer(s) |
+                            <% } else { %>
+                                Student |
+                                <% } %>
+                                    <%= letterOfApproval.time.expiresOn.toLocaleDateString() %>
+                                        <strong>(<%= letterOfApproval.elapsedTimeDay %> Days
+                                                Left)</strong>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                &#8226;&#8226;&#8226;
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item"
+                                        href="/lecturer/download-loa/<%= letterOfApproval._id %>">Download
+                                        PDF</a></li>
+                                <% if
+                                    ((letterOfApproval.statusOfFirstLecturer.lecturer._id.toHexString()==lecturer._id.toHexString()
+                                    && letterOfApproval.statusOfFirstLecturer.code!="Approved" ) ||
+                                    (letterOfApproval.statusOfSecondLecturer.lecturer._id.toHexString()==lecturer._id.toHexString()
+                                    && letterOfApproval.statusOfSecondLecturer.code!="Approved" )) { %>
+                                    <li><a class="dropdown-item"
+                                            href="/lecturer/student/<%= letterOfApproval.author._id %>/loa/<%= letterOfApproval._id %>/sign-loa">Sign</a>
+                                    </li>
+                                    <% } %>
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/inbox-loa/student/<%= letterOfApproval.author._id %>/loa/<%= letterOfApproval._id %>">Detail</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/inbox-loa/student/<%= letterOfApproval.author._id %>/loa/<%= letterOfApproval._id %>/history">History</a>
+                                        </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+                    <% for (let letterOfApproval of pendingLettersOfApprovalOthers) { %>
+                        <tr>
+                            <th scope="row">
+                                <%= letterOfApproval.status %>
+                            </th>
+                            <td>
+                                <%= letterOfApproval.author.username %> | <%= letterOfApproval.author.name %> | <%=
+                                            letterOfApproval.author.department %>
+                            </td>
+                            <td>
+                                <%= letterOfApproval.author.email %>
+                            </td>
+                            <td>
+                                <ul>
+                                    <% if (letterOfApproval.author.firstLecturer !=undefined) { %>
+                                        <li>
+                                            <strong>1<sup>ST</sup> SUPERVISOR:</strong> <br>
+                                            <strong>
+                                                <%= letterOfApproval.statusOfFirstLecturer.code %>
+                                            </strong> |
+                                            <%= letterOfApproval.author.firstLecturer.username %> |
+                                                <%= letterOfApproval.author.firstLecturer.name %> | <%=
+                                                        letterOfApproval.author.firstLecturer.department %>
+                                        </li>
+                                        <% } %>
+                                            <% if (letterOfApproval.author.secondLecturer !=undefined) { %>
+                                                <li>
+                                                    <strong>2<sup>ND</sup> SUPERVISOR:</strong> <br>
+                                                    <strong>
+                                                        <%= letterOfApproval.statusOfSecondLecturer.code %>
+                                                    </strong> |
+                                                    <%= letterOfApproval.author.secondLecturer.username %> |
+                                                        <%= letterOfApproval.author.secondLecturer.name %> | <%=
+                                                                letterOfApproval.author.secondLecturer.department %>
+                                                </li>
+                                                <% } %>
+                                </ul>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        &#8226;&#8226;&#8226;
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/download-loa/<%= letterOfApproval._id %>">Download
+                                                PDF</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/inbox-loa/student/<%= letterOfApproval.author._id %>/loa/<%= letterOfApproval._id %>">Detail</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="/lecturer/inbox-loa/student/<%= letterOfApproval.author._id %>/loa/<%= letterOfApproval._id %>/history">History</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <% } %>
+        </tbody>
+    </table>

@@ -1,0 +1,72 @@
+<% layout("layouts/boilerplateStudents") %>
+
+    <h1 class="page-title">
+        HISTORY
+    </h1>
+
+    <div class="row mt-5">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow mb-3 py-2">
+                <h2 class="ps-3">Detail</h2>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <label class="h5" for="time-created">Time Created</label>
+                    <div class="card p-2 mb-3">
+                        <p class="card-text mb-0" id="time-created">
+                            <%= letterOfApprovalHistory.createdOn.toLocaleDateString() %>
+                        </p>
+                    </div>
+                    <label class="h5" for="detail">Detail</label>
+                    <div class="card p-2 mb-3">
+                        <p class="card-text mb-0" id="detail">
+                            <%= letterOfApprovalHistory.detail %>
+                        </p>
+                    </div>
+                    <label class="h5" for="content">Content</label>
+                    <div class="card p-2 mb-3">
+                        <p class="card-text mb-0" id="content">
+                            <%= letterOfApprovalHistory.file.originalname %>
+                        </p>
+                    </div>
+                    <label class="h5" for="status">Status</label>
+                    <div class="card p-2 mb-3">
+                        <p class="card-text mb-0" id="status">
+                            <%= letterOfApprovalHistory.status %>
+                        </p>
+                    </div>
+                    <label class="h5" for="status">Status of Supervisors</label>
+                    <div class="card p-2 mb-3">
+                        <ul class="card-text mb-0" id="status">
+                            <% if (student.firstLecturer !=undefined) { %>
+                                <li>
+                                    <strong>1<sup>ST</sup> SUPERVISOR:</strong> <br>
+                                    <strong>
+                                        <%= letterOfApprovalHistory.statusOfFirstLecturer.code %>
+                                    </strong> | <%= student.firstLecturer.username %> |
+                                        <%= student.firstLecturer.name %> |
+                                            <%= student.firstLecturer.department %>
+                                </li>
+                                <% } %>
+                                    <% if (student.secondLecturer !=undefined) { %>
+                                        <li>
+                                            <strong>2<sup>ND</sup> SUPERVISOR:</strong> <br>
+                                            <strong>
+                                                <%= letterOfApprovalHistory.statusOfSecondLecturer.code %>
+                                            </strong> | <%= student.secondLecturer.username %> |
+                                                <%= student.secondLecturer.name %> |
+                                                    <%= student.secondLecturer.department %>
+                                        </li>
+                                        <% } %>
+                        </ul>
+                    </div>
+                    <a class="btn btn-sm btn-secondary mt-3 mx-1"
+                        href="/student/download-loa-history/<%= letterOfApprovalHistory._id %>">Download
+                        PDF</a>
+                    <a class="btn btn-sm btn-secondary mt-3 mx-3"
+                        href="/student/loa/<%= letterOfApproval._id %>/history">&larr;
+                        Previous Page</a>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,54 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title mb-4">
+        NEW ASSIGNED STUDENT
+    </h1>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow mb-3 py-2">
+                <h2 class="text-center mb-1">Choose a Student</h2>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <form action="/admin/user-lecturers/<%= lecturer._id %>/add-student" method="POST" novalidate
+                        class="validated-form">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="role-select">Role</label>
+                            <select class="form-select" id="role-select" name="student[role]" required>
+                                <option selected>Choose...</option>
+                                <option value="firstSupervisor">
+                                    First Supervisor
+                                </option>
+                                <option value="secondSupervisor">
+                                    Second Supervisor
+                                </option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="students-select">Students</label>
+                            <select class="form-select" id="students-select" name="student[username]" required>
+                                <option selected>Choose...</option>
+                                <% for (let student of students) { %>
+                                    <option value="<%= student._id %>">
+                                        <%= student.username %> | <%= student.name %> | <%= student.department %>
+                                    </option>
+                                    <% } %>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-secondary">Add Student</button>
+                        </div>
+                    </form>
+                    <a class="btn btn-sm btn-secondary mt-3" href="/admin/user-lecturers/<%= lecturer._id %>">&larr;
+                        Previous Page</a>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,75 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title mb-4">
+        EDIT GUIDE
+    </h1>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow mb-3 py-2">
+                <h2 class="text-center mb-1">Edit Guide Below</h2>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <form action="/admin/info-howtos/<%= howto.id %>/edit-howto?_method=PUT" method="POST"
+                        class="validated-form" enctype="multipart/form-data" novalidate>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="howto[title]" placeholder="Title"
+                                value="<%= howto.title %>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <input type="text" class="form-control" id="content" name="howto[content]"
+                                placeholder="Content" value="<%= howto.content %>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="audience">Audience</label>
+                            <select class="form-select" id="audience" name="howto[audience]">
+                                <option value="<%= howto.audience %>" selected>
+                                    <%= howto.audience %>
+                                </option>
+                                <option value="Student">
+                                    Student
+                                </option>
+                                <option value="Lecturer">
+                                    Lecturer
+                                </option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Add More Image(s)</label>
+                            <input class="form-control" type="file" id="file" name="file" multiple>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <% howto.files.forEach(function(img, i) { %>
+                                <img src="<%=img.url%>" class="img-thumbnail" alt="">
+                                <div class="form-check-inline">
+                                    <input type="checkbox" name="deleteImages[]" value="<%=img.filename%>"
+                                        id="image-<%= i %> ">
+                                </div>
+                                <label for="image-<%= i %>">Delete?</label>
+                                <% }) %>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-secondary">Edit Guide</button>
+                        </div>
+                    </form>
+                    <a class="btn btn-sm btn-secondary mt-3" href="/admin/info-howtos/<%= howto._id %>">&larr;
+                        Previous Page</a>
+                </div>
+            </div>
+        </div>
+    </div>

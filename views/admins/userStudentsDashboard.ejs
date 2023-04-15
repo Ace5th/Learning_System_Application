@@ -1,0 +1,79 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title">USER | STUDENTS</h1>
+    <a href="/admin/user-students/add-student" class="btn btn-sm btn-secondary mb-2">Add
+        Student</a>
+
+    <a href="/admin/user-students/unassigned-students" class="btn btn-sm btn-secondary mb-2 ms-5">
+        Students Without Supervisors (Unassigned) <span class="badge text-bg-light ms-1">
+            <%= unassignedStudents %>
+        </span></a>
+    <a href="/admin/user-students/accepted-students" class="btn btn-sm btn-secondary mb-2 ms-1">
+        Students With Accepted Phase 1 and 2 Assignments <span class="badge text-bg-light ms-1">
+            <%= acceptedStudents %>
+        </span></a>
+    <table class="table table-striped-columns table-hover">
+        <thead>
+            <tr>
+                <th scope="col">NIM</th>
+                <th scope="col">Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Supervisors</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let student of students) { %>
+                <tr>
+                    <th scope="row">
+                        <%= student.username %>
+                    </th>
+                    <td>
+                        <%= student.name %>
+                    </td>
+                    <td>
+                        <%= student.department %>
+                    </td>
+                    <td>
+                        <%= student.email %>
+                    </td>
+                    <td>
+                        <%= student.phoneNumber %>
+                    </td>
+                    <td>
+                        <ul>
+                            <% if (student.firstLecturer !=undefined) { %>
+                                <li>
+                                    <strong>1<sup>ST</sup> SUPERVISOR:</strong> <br>
+                                    <%= student.firstLecturer.username %> | <%= student.firstLecturer.name %> | <%=
+                                                student.firstLecturer.department %>
+                                </li>
+                                <% } %>
+                                    <% if (student.secondLecturer !=undefined) { %>
+                                        <li>
+                                            <strong>2<sup>ND</sup> SUPERVISOR:</strong> <br>
+                                            <%= student.secondLecturer.username %> | <%= student.secondLecturer.name %>
+                                                    | <%= student.secondLecturer.department %>
+                                        </li>
+                                        <% } %>
+                        </ul>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                &#8226;&#8226;&#8226;
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="/admin/user-students/<%=student._id%>">Open</a></li>
+                                <li><a class="dropdown-item"
+                                        href="/admin/user-students/<%=student._id%>/delete-student">Delete</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>

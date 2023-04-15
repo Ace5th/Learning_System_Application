@@ -1,0 +1,69 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title">
+        <%= assignment.title %> : REVIEWS LIST
+    </h1>
+    <a href="/admin/user-lecturers/<%= lecturer._id %>" class="btn btn-sm btn-secondary mb-2">&larr; Previous Page</a>
+
+    <div class="row mt-5">
+        <h4>Attached Reviews <strong>By</strong>
+            <%= lecturer.username %> | <%= lecturer.name %>
+        </h4>
+    </div>
+    <% if ((assignment.statusOfFirstLecturer.lecturer._id.toHexString()==lecturer._id.toHexString() &&
+        assignment.statusOfFirstLecturer.code!="Reviewed" ) ||
+        (assignment.statusOfSecondLecturer.lecturer._id.toHexString()==lecturer._id.toHexString() &&
+        assignment.statusOfSecondLecturer.code!="Reviewed" )) { %>
+        <a class="btn btn-sm btn-secondary mb-2"
+            href="/admin/user-lecturers/<%= lecturer._id %>/assignment/<%= assignment._id %>/review">Give
+            Review</a>
+        <% } %>
+
+            <table class="table table-striped-columns">
+                <thead>
+                    <tr>
+                        <th scope="col">Time Created</th>
+                        <th scope="col" colspan="2">Author</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let review of assignment.reviews) { %>
+                        <tr>
+                            <th scope="row">
+                                <%= review.createdOn.toLocaleDateString() %>
+                            </th>
+                            <td>
+                                <%= review.author.username %> | <%= review.author.department %>
+                            </td>
+                            <td>
+                                <%= review.author.name %>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        &#8226;&#8226;&#8226;
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        <% if(review.file) { %>
+                                            <a class="dropdown-item"
+                                                href="/admin/download-review/<%= review._id %>">Download
+                                                PDF</a>
+                                            <% } %>
+                                                <li><a class="dropdown-item"
+                                                        href="/admin/user-lecturers/<%= lecturer._id %>/assignment/<%= assignment._id %>/review/<%= review._id %>/edit-review">Edit</a>
+                                                </li>
+                                                <li><a class="dropdown-item"
+                                                        href="/admin/user-lecturers/<%= lecturer._id %>/assignment/<%= assignment._id %>/review/<%= review._id %>/delete-review">Remove</a>
+                                                </li>
+                                                <li><a class="dropdown-item"
+                                                        href="/admin/user-lecturers/<%= lecturer._id %>/assignment/<%= assignment._id %>/review/<%= review._id %>">Detail</a>
+                                                </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>

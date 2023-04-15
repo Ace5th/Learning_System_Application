@@ -1,0 +1,69 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title mb-4">
+        NEW ASSIGNED LECTURER
+    </h1>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow mb-3 py-2">
+                <h2 class="text-center mb-1">Choose Supervisors</h2>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <form action="/admin/user-students/<%= student._id %>/add-lecturer" method="POST" novalidate
+                        class="validated-form">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="first-lecturer-select">1<sup>st</sup>
+                                Supervisor</label>
+                            <select class="form-select" id="first-lecturer-select" name="lecturer[firstSupervisor]">
+                                <% if (student.firstLecturer) {%>
+                                    <option value="<%= student.firstLecturer._id %>" selected>
+                                        <%=student.firstLecturer.username %> | <%= student.firstLecturer.name %>
+                                    </option>
+                                    <% } else { %>
+                                        <option selected>Choose...</option>
+                                        <% for (let lecturer of lecturers) { %>
+                                            <option value="<%= lecturer._id %>">
+                                                <%= lecturer.username %> | <%= lecturer.name %> | <%= lecturer.department %>
+                                            </option>
+                                            <% } %>
+                                                <% } %>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="second-lecturer-select">2<sup>nd</sup>
+                                Supervisor</label>
+                            <select class="form-select" id="second-lecturer-select" name="lecturer[secondSupervisor]">
+                                <% if (student.secondLecturer) {%>
+                                    <option value="<%= student.secondLecturer._id %>" selected>
+                                        <%=student.secondLecturer.username %> | <%= student.secondLecturer.name %>
+                                    </option>
+                                    <% } else { %>
+                                        <option selected>Choose...</option>
+                                        <% for (let lecturer of lecturers) { %>
+                                            <option value="<%= lecturer._id %>">
+                                                <%= lecturer.username %> | <%= lecturer.name %>
+                                            </option>
+                                            <% } %>
+                                                <% } %>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <button class="btn btn-secondary">Choose Supervisors</button>
+                        </div>
+                    </form>
+                    <a class="btn btn-sm btn-secondary mt-3" href="/admin/user-students/<%= student._id %>">&larr;
+                        Previous Page</a>
+                </div>
+            </div>
+        </div>
+    </div>

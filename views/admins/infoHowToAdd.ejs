@@ -1,0 +1,62 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title mb-4">
+        NEW GUIDE
+    </h1>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow mb-3 py-2">
+                <h2 class="text-center mb-1">Add Guide Below</h2>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <form action="/admin/info-howtos/add-howto" method="POST" class="validated-form"
+                        enctype="multipart/form-data" novalidate>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="title" name="howto[title]" placeholder="Title">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label">Content</label>
+                            <input type="text" class="form-control" id="content" name="howto[content]"
+                                placeholder="Content">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Add Image(s)</label>
+                            <input class="form-control" type="file" id="file" name="file" multiple>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="audience">Audience</label>
+                            <select class="form-select" id="audience" name="howto[audience]">
+                                <option selected>Choose...</option>
+                                <option value="Student">
+                                    Student
+                                </option>
+                                <option value="Lecturer">
+                                    Lecturer
+                                </option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-secondary">Add Guide</button>
+                        </div>
+                    </form>
+                    <a class="btn btn-sm btn-secondary mt-3" href="/admin/info-howtos">&larr;
+                        Previous Page</a>
+                </div>
+            </div>
+        </div>
+    </div>

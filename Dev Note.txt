@@ -1,0 +1,18 @@
+Imperfect:
+1. For admin dashboard (its controller), the logic for assignment status can be added into the assignmentSchema or a middleware
+2. Some of the route for the admin is not ordered or written well
+3. Detail of lecturer's students can be more flushed out (lecturer's route)
+4. Many of the route is not orderly, write it properly
+5. Kirim peringatan email
+6. Bisa nyalakan helmet kalau mau, asal perhatikan confignya
+7. Akan ada error jika mengaktivasi joi sebelum upload.array, jadi perlu diurus
+8. Some html code is near code-breaking (located in lecturer route, views, nested logic)
+10. Warning feature for every user
+12. Document kalau bisa word
+13. Field untuk search untuk semua yang ada listnya
+14. Pemberian detail mengenai tiap field information untuk route
+15. Dashboard bling
+16. Add notice via email if informations are changed and add undo something if the user didn't initiate the process directly
+17. Add photo profile for user
+18. Need to have the next step after student finished all the proceedings, are they to be deleted or what (Currently, after signing, the student db is immediately deleted from lecturer)
+19. Use on for git push on master

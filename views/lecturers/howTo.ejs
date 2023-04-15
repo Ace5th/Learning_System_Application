@@ -1,0 +1,55 @@
+<% layout("layouts/boilerplateLecturers") %>
+
+    <h1 class="page-title display-1">GUIDE</h1>
+
+    <div class="page-body mb-4">
+        <% for (let i=0; i < howtos.length; i++) {%>
+            <div class="howTo mb-2">
+                <div class="card card-body p-0">
+                    <button class="btn" type="button" data-bs-toggle="collapse" data-bs-target="#how-to<%= i %>"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        <h5 class="text-start">
+                            <%= i+1 %>.
+                                <%= howtos[i].title %>
+                        </h5>
+                    </button>
+                </div>
+
+                <div class="collapse" id="how-to<%= i %>">
+                    <div class="card card-body mt-1">
+                        <% if (howtos[i].files!=undefined) { %>
+                            <div class="row">
+                                <div class="col-6 offset-3">
+                                    <div id="howToCarousel" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <% howtos[i].files.forEach((img, x)=> { %>
+                                                <div class="carousel-item <%= x === 0 ? 'active' : ''%> ">
+                                                    <img class="d-block w-100" src="<%= img.url %> " alt="">
+                                                </div>
+                                                <% }) %>
+                                        </div>
+                                        <% if(howtos[i].files.length> 1) {%>
+                                            <a class="carousel-control-prev" href="#howToCarousel" role="button"
+                                                data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only"></span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#howToCarousel" role="button"
+                                                data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only"></span>
+                                            </a>
+                                            <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <% } %>
+                                <p>
+                                    <%= howtos[i].content %>
+                                </p>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+    </div>

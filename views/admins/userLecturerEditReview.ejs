@@ -1,0 +1,60 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title">
+        REVIEW <%= assignment.title %> <strong>BY</strong>
+            <%= lecturer.username %> | <%= lecturer.name %>
+    </h1>
+
+    <div class="row mt-5">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow mb-3 py-2">
+                <h2 class="ps-3">Edit Below</h2>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <form
+                        action="/admin/user-lecturers/<%= lecturer._id %>/assignment/<%= assignment._id %>/review/<%= review._id %>/edit-review?_method=PUT"
+                        method="POST" class="validated-form" enctype="multipart/form-data" novalidate>
+                        <% for (let data of review.data) { %>
+                            <div>
+                                <div class="mb-3">
+                                    <label class="form-label h5" for="title">Title</label>
+                                    <input class="form-control" type="text" name="review[title]" id="title"
+                                        placeholder="title" value="<%= data.title %>" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label h5" for="content">Content</label>
+                                    <textarea class="form-control" type="text" name="review[content]" id="content"
+                                        placeholder="Content" required><%= data.content %></textarea>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <% } %>
+                                <div class="mb-3">
+                                    <label for="file" class="form-label h5">Add a PDF (Optional)</label>
+                                    <input class="form-control mb-3" type="file" id="file" name="file">
+                                    <label for="file-content" class="form-label h5">Uploaded File</label>
+                                    <p class="card-text mb-0" id="file-content">
+                                        <%= review.file.originalname %>
+                                    </p>
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="mb-3">
+                                    <button class="btn btn-secondary">Edit Review</button>
+                                </div>
+                    </form>
+                    <a class="btn btn-sm btn-secondary mt-3 mx-3"
+                        href="/admin/user-lecturers/<%= lecturer._id %>/assignment/<%= assignment._id %>/review/<%= review._id %>">&larr;
+                        Previous Page</a>
+                </div>
+            </div>
+        </div>
+    </div>

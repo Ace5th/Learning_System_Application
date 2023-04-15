@@ -1,0 +1,53 @@
+<% layout("layouts/boilerplateStudents") %>
+
+    <h1 class="page-title">
+        <%= assignment.title %>
+    </h1>
+    <a href="/student" class="btn btn-sm btn-secondary mb-2">&larr; Previous Page</a>
+
+    <div class="row mt-5">
+        <h4>Reviews List</h4>
+    </div>
+
+    <table class="table table-striped-columns">
+        <thead>
+            <tr>
+                <th scope="col">TIME CREATED</th>
+                <th scope="col" colspan="2">AUTHOR</th>
+                <th scope="col">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let review of assignment.reviews) { %>
+
+                <tr>
+                    <th scope="row">
+                        <%= review.createdOn.toLocaleDateString() %>
+                    </th>
+                    <td>
+                        <%= review.author.username %> | <%= review.author.department %>
+                    </td>
+                    <td>
+                        <%= review.author.name %>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                &#8226;&#8226;&#8226;
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <% if(review.file) { %>
+                                    <a class="dropdown-item" href="/student/download-review/<%= review._id %>">Download
+                                        PDF</a>
+                                    <% } %>
+                                        <li><a class="dropdown-item"
+                                                href="/student/assignment/<%= assignment._id %>/review/<%= review._id %>">Detail</a>
+                                        </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>

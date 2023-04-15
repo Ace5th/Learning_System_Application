@@ -1,0 +1,20 @@
+.login-logo {
+  padding: 10% 2%;
+  max-width: 80%;
+  height: auto;
+  align-self: center;
+}
+
+.login-card {
+  width: 18rem;
+  height: 40rem;
+  overflow: auto;
+}
+
+.delete-user-form {
+  display: inline;
+}
+
+.phase-card {
+  height: 23rem;
+}

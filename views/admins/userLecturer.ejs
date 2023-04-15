@@ -1,0 +1,357 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title">LECTURER: <%= lecturer.username %>
+            <div class="dropdown">
+                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    &#8226;&#8226;&#8226;
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li>
+                        <a class="dropdown-item" href="/admin/user-lecturers/<%=lecturer._id%>/delete-lecturer">Delete
+                            Lecturer</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/admin/user-lecturers">Previous Page</a>
+                    </li>
+                </ul>
+            </div>
+    </h1>
+
+    <div class="row mt-5">
+        <h4>Profile</h4>
+    </div>
+
+    <table class="table table-striped-columns">
+        <thead>
+            <tr>
+                <th scope="col">NIP</th>
+                <th scope="col">Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">
+                    <%= lecturer.username %>
+                </th>
+                <td>
+                    <%= lecturer.name %>
+                </td>
+                <td>
+                    <%= lecturer.department %>
+                </td>
+                <td>
+                    <%= lecturer.email %>
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            &#8226;&#8226;&#8226;
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item"
+                                    href="/admin/user-lecturers/<%= lecturer._id %>/edit-lecturer">Edit</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row mt-5">
+        <h4>Assigned Students</h4>
+    </div>
+
+    <a href="/admin/user-lecturers/<%= lecturer._id %>/add-student" class="btn btn-sm btn-secondary mb-2">Add
+        Student</a>
+    <table class="table table-striped-columns">
+        <thead>
+            <tr>
+                <th scope="col">NIM</th>
+                <th scope="col">Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let student of lecturer.students) { %>
+                <tr>
+                    <th scope="row">
+                        <%= student.username %>
+                    </th>
+                    <td>
+                        <%= student.name %>
+                    </td>
+                    <td>
+                        <%= student.department %>
+                    </td>
+                    <td>
+                        <%= student.email %>
+                    </td>
+                    <td>
+                        <%= student.phoneNumber %>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                &#8226;&#8226;&#8226;
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item"
+                                        href="/admin/user-lecturers/<%= lecturer._id %>/student/<%= student._id %>/delete-student">Remove</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>
+
+
+    <div class="row mt-5">
+        <h4>Assignments</h4>
+    </div>
+
+    <a href="/admin/user-lecturers/<%= lecturer._id %>/assignment" class="btn btn-sm btn-secondary mb-2">Add
+        Assignment</a>
+    <table class="table table-striped-columns">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Phase</th>
+                <th scope="col">Author</th>
+                <th scope="col" colspan="2">Status</th>
+                <th scope="col">Reviews</th>
+                <th scope="col">Time Updated</th>
+                <th scope="col">Deadline</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let student of students) { %>
+                <% for (let assignment of student.assignments) { %>
+                    <% if (assignment.status=="Accepted" ) { %>
+                        <tr class="table-success">
+                            <% } else { %>
+                        <tr>
+                            <% } %>
+                                <th scope="row">
+                                    <%= assignment.title %>
+                                </th>
+                                <td>
+                                    <%= assignment.phase %>
+                                </td>
+                                <td>
+                                    <%= student.username %> | <%= student.name %>
+                                </td>
+                                <td>
+                                    <%= assignment.status %>
+                                </td>
+                                <td>
+                                    <ul>
+                                        <% if (assignment.statusOfFirstLecturer !=undefined) {%>
+                                            <li>
+                                                <strong>1<sup>ST</sup> SUPERVISOR:</strong> <br>
+                                                <strong>
+                                                    <%= assignment.statusOfFirstLecturer.code %>
+                                                </strong> | <%= student.firstLecturer.username %> |
+                                                    <%= student.firstLecturer.name %> | <%=
+                                                            student.firstLecturer.department %>
+                                            </li>
+                                            <% } %>
+                                                <% if (assignment.statusOfSecondLecturer !=undefined) {%>
+                                                    <li>
+                                                        <strong>2<sup>ND</sup> SUPERVISOR:</strong> <br>
+                                                        <strong>
+                                                            <%= assignment.statusOfSecondLecturer.code %>
+                                                        </strong> |
+                                                        <%= student.secondLecturer.username %> |
+                                                            <%= student.secondLecturer.name %> | <%=
+                                                                    student.secondLecturer.department %>
+                                                    </li>
+                                                    <% } %>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <%= assignment.reviews.length %>
+                                </td>
+                                <td>
+                                    <%= assignment.time.updatedOn.toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <% if (assignment.status=="Under Review by Lecturers" ) { %>
+                                        Lecturer(s) |
+                                        <% } else { %>
+                                            Student |
+                                            <% } %>
+                                                <%= assignment.time.expiresOn.toLocaleDateString() %> <strong>(<%=
+                                                            assignment.elapsedTimeDay %> Days
+                                                            Left)</strong>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            &#8226;&#8226;&#8226;
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-dark">
+                                            <li><a class="dropdown-item"
+                                                    href="/admin/user-lecturers/<%= lecturer._id %>/assignment/<%= assignment._id %>/accept-assignment">Accept
+                                                    Assignment</a>
+                                            </li>
+                                            <% if
+                                                ((assignment.statusOfFirstLecturer.lecturer._id.toHexString()==lecturer._id.toHexString()
+                                                && assignment.statusOfFirstLecturer.code!="Reviewed" ) ||
+                                                (assignment.statusOfSecondLecturer.lecturer._id.toHexString()==lecturer._id.toHexString()
+                                                && assignment.statusOfSecondLecturer.code!="Reviewed" )) { %>
+                                                <a class="dropdown-item"
+                                                    href="/admin/user-lecturers/<%= lecturer._id %>/assignment/<%= assignment._id %>/review">Give
+                                                    Review</a>
+                                                <% } %>
+                                                    <% if (assignment.status=="Under Editing by Student" ||
+                                                        assignment.override==true) { %>
+                                                        <li><a class="dropdown-item"
+                                                                href="/admin/user-lecturers/<%=lecturer._id%>/assignment/<%=assignment._id%>/edit-assignment">Update</a>
+                                                        </li>
+                                                        <% } %>
+                                                            <li><a class="dropdown-item"
+                                                                    href="/admin/download-assignment/<%=assignment._id%>">Download
+                                                                    PDF</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href="/admin/user-lecturers/<%= lecturer._id %>/assignment/<%= assignment._id %>/override-assignment">Override</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href="/admin/user-lecturers/<%=lecturer._id%>/assignment/<%=assignment._id%>/delete-assignment">Remove</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href="/admin/user-lecturers/<%=lecturer._id%>/assignment/<%=assignment._id%>">Detail</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href="/admin/user-lecturers/<%=lecturer._id%>/assignment/<%=assignment._id%>/reviews">Reviews
+                                                                    List</a>
+                                                            </li>
+                                                            <li><a class="dropdown-item"
+                                                                    href="/admin/user-lecturers/<%=lecturer._id%>/assignment/<%=assignment._id%>/history">History</a>
+                                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                        </tr>
+                        <% } %>
+                            <% } %>
+        </tbody>
+    </table>
+
+    <div class="row mt-5">
+        <h4>Letter of Approval</h4>
+    </div>
+    <a href="/admin/user-lecturers/<%= lecturer._id %>/loa" class="btn btn-sm btn-secondary mb-2 ms-2 col-md-2">Create
+        New</a>
+
+    <table class="table table-striped-columns">
+        <thead>
+            <tr>
+                <th scope="col" colspan="2">STATUS</th>
+                <th scope="col">TIME UPDATED</th>
+                <th scope="col">DEADLINE</th>
+                <th scope="col">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let student of students) { %>
+                <% if (student.letterOfApproval) { %>
+                    <% if (student.letterOfApproval.status=="Approved" ) { %>
+                        <tr class="table-success">
+                            <% } else { %>
+                        <tr>
+                            <% } %>
+                                <th scope="row">
+                                    <%= student.letterOfApproval.status %>
+                                </th>
+                                <td>
+                                    <ul>
+                                        <% if (student.firstLecturer !=undefined) { %>
+                                            <li>
+                                                <strong>1<sup>ST</sup> SUPERVISOR:</strong>
+                                                <br>
+                                                <strong>
+                                                    <%= student.letterOfApproval.statusOfFirstLecturer.code %>
+                                                </strong>| <%= student.firstLecturer.username %>
+                                                    |
+                                                    <%= student.firstLecturer.name %> |
+                                                        <%= student.firstLecturer.department %>
+                                            </li>
+                                            <% } %>
+                                                <% if (student.secondLecturer !=undefined) { %>
+                                                    <li>
+                                                        <strong>2<sup>ND</sup>
+                                                            SUPERVISOR:</strong> <br>
+                                                        <strong>
+                                                            <%= student.letterOfApproval.statusOfSecondLecturer.code %>
+                                                        </strong> | <%= student.secondLecturer.username %> |
+                                                            <%= student.secondLecturer.name %> |
+                                                                <%= student.secondLecturer.department %>
+                                                    </li>
+                                                    <% } %>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <%= student.letterOfApproval.time.updatedOn.toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <% if (student.letterOfApproval.status=="Waiting for Approval" ) { %>
+                                        Lecturer(s) |
+                                        <% } else { %>
+                                            Student |
+                                            <% } %>
+                                                <%= student.letterOfApproval.time.expiresOn.toLocaleDateString() %>
+                                                    <strong>(<%= student.letterOfApproval.elapsedTimeDay %>
+                                                            Days
+                                                            Left)</strong>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            &#8226;&#8226;&#8226;
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-dark">
+                                            <li><a class="dropdown-item"
+                                                    href="/admin/download-loa/<%= student.letterOfApproval._id %>">Download
+                                                    PDF</a></li>
+                                            <% if
+                                                ((student.letterOfApproval.statusOfFirstLecturer.lecturer._id.toHexString()==student.firstLecturer._id.toHexString()
+                                                && student.letterOfApproval.statusOfFirstLecturer.code!="Approved" ) ||
+                                                (student.letterOfApproval.statusOfSecondLecturer.lecturer._id.toHexString()==student.secondLecturer._id.toHexString()
+                                                && student.letterOfApproval.statusOfSecondLecturer.code!="Approved" )) {
+                                                %>
+                                                <li><a class="dropdown-item"
+                                                        href="/admin/user-lecturers/<%= lecturer._id %>/loa/<%= student.letterOfApproval._id %>/sign-loa">Sign</a>
+                                                </li>
+                                                <% } %>
+                                                    <li><a class="dropdown-item"
+                                                            href="/admin/user-lecturers/<%= lecturer._id %>/loa/<%= student.letterOfApproval._id %>/delete-loa">Remove</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item"
+                                                            href="/admin/user-lecturers/<%= lecturer._id %>/loa/<%= student.letterOfApproval._id %>">Detail</a>
+                                                    </li>
+                                                    <li><a class="dropdown-item"
+                                                            href="/admin/user-lecturers/<%= lecturer._id %>/loa/<%= student.letterOfApproval._id %>/history">History</a>
+                                                    </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                        </tr>
+                        <% } %>
+                            <% } %>
+        </tbody>
+    </table>

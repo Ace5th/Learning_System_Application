@@ -1,0 +1,25 @@
+<% layout("layouts/boilerplateLecturers") %>
+
+    <div class="card text-center">
+        <div class="card-header">
+            ACCEPT ASSIGNMENT
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Are you sure?</h5>
+            <p class="card-text">Doing this will indicate that you have reviewed and have accepted the assignment: <%=
+                    assignment.title %> <strong>by</strong>
+                    <%= student.username %> | <%= student.name %>
+            </p>
+            <form
+                action="/lecturer/student/<%= student._id %>/assignment/<%= assignment._id %>/accept-assignment?_method=PUT"
+                method="POST" class="validated-form" novalidate>
+                <div class="mb-3">
+                    <button class="btn btn-secondary">Accept Assignment</button>
+                </div>
+            </form>
+            <a class="btn btn-sm btn-secondary mt-3 mx-4" onclick="history.back()">&larr;
+                Previous Page</a>
+        </div>
+        <div class="card-footer text-muted">
+        </div>
+    </div>

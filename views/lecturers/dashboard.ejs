@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISTA | FEB Universitas Hasanuddin</title>
+    <link rel="icon" type="image/icon type"
+        href="https://res.cloudinary.com/dpghf08pr/image/upload/v1661885348/UNHAS-SISTA/WEB-RESOURCE/Universitas_Hasanuddin_Official_Logo_bf63rx.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/dashboardLecturers.css">
+</head>
+
+<body>
+    <div class="dashboard-page d-flex flex-column vh-100">
+        <%- include("../partials/navbarLecturers") %>
+
+            <header class="dashboard-header">
+                <div class="container-fluid header-container">
+                    <h1 class="page-title display-1 fw-bold dasboard-title text-light">DASHBOARD</h1>
+                </div>
+            </header>
+
+            <main class="dashboard-main mb-5">
+                <div class="container px-5">
+                    <%- include("../flash") %>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="card shadow mb-2 py-1 text-bg-dark">
+                            <h3 class="ps-3 py-1">MY PROFILE</h3>
+                        </div>
+
+                        <div class="card shadow mb-3">
+                            <div class="card-body row">
+                                <div class="col-md-6 mb-4">
+                                    <label class="h4" for="lecturer-username">NIP</label>
+                                    <div class="card">
+                                        <p class="card-text profile-label" id="lecturer-username">
+                                            <%= lecturer.username %>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    <label class="h4" for="lecturer-name">NAME</label>
+                                    <div class="card">
+                                        <p class="card-text profile-label" id="lecturer-name">
+                                            <%= lecturer.name %>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="h4" for="lecturer-email">E-MAIL</label>
+                                    <div class="card">
+                                        <p class="card-text profile-label" id="lecturer-email">
+                                            <%= lecturer.email %>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="h4" for="lecturer-department">DEPARTMENT</label>
+                                    <div class="card">
+                                        <p class="card-text profile-label" id="lecturer-department">
+                                            <%= lecturer.department %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center mb-3">
+                            <a role="button" class="btn text-bg-dark col-md-5 mx-1 " href="/lecturer/howto">
+                                <p class="display-6 mb-0 fw-semibold">GUIDE</p>
+                            </a>
+                            <a role="button" class="btn text-bg-dark col-md-5 mx-1" href="/lecturer/faqs">
+                                <p class="display-6 mb-0 fw-semibold">FAQS</p>
+                            </a>
+                        </div>
+
+                        <div class="text-center mb-5">
+                            <hr>
+                            <h1>STATISTICS</h1>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="card shadow col-md-3 p-0 mb-5 mx-4">
+                                <div class="card-header text-center h3">Total Assigned Students</div>
+                                <div class="card-body">
+                                    <p class="display-4 text-center mb-0 py-1">
+                                        <%= lecturer.students.length %>
+                                    </p>
+                                </div>
+                                <div class="card-footer"></div>
+                            </div>
+
+                            <div class="card shadow col-md-3 p-0 mb-5 mx-4">
+                                <div class="card-header text-center h3">Total Assignments</div>
+                                <div class="card-body">
+                                    <p class="display-4 text-center mb-0 py-1">
+                                        <%= totalAssignments %>
+                                    </p>
+                                </div>
+                                <div class="card-footer"></div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="card shadow col-md-3 p-0 mb-5 mx-4">
+                                <div class="card-header text-center h3">Total Assignments Not Yet Reviewed by Lecturer
+                                </div>
+                                <div class="card-body">
+                                    <p class="display-4 text-center mb-0 py-1">
+                                        <%= pendingAssignments %>
+                                    </p>
+                                </div>
+                                <div class="card-footer"></div>
+                            </div>
+
+                            <div class="card shadow col-md-3 p-0 mb-5 mx-4">
+                                <div class="card-header text-center h3">Total Assignments Under Editing by Student</div>
+                                <div class="card-body">
+                                    <p class="display-4 text-center mb-0 py-1">
+                                        <%= reviewedAssignments %>
+                                    </p>
+                                </div>
+                                <div class="card-footer"></div>
+                            </div>
+
+                            <div class="card shadow col-md-3 p-0 mb-5 mx-4">
+                                <div class="card-header text-center h3">Total Assignments Already Accepted by Lecturer
+                                </div>
+                                <div class="card-body">
+                                    <p class="display-4 text-center mb-0 py-1">
+                                        <%= acceptedAssignments %>
+                                    </p>
+                                </div>
+                                <div class="card-footer"></div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="card shadow col-md-3 p-0 mb-5 mx-4">
+                                <div class="card-header text-center h3">Total Letters of Approval Not Yet Signed by
+                                    Lecturer
+                                </div>
+                                <div class="card-body">
+                                    <p class="display-4 text-center mb-0 py-1">
+                                        <%= pendingLettersOfApproval %>
+                                    </p>
+                                </div>
+                                <div class="card-footer"></div>
+                            </div>
+
+                            <div class="card shadow col-md-3 p-0 mb-5 mx-4">
+                                <div class="card-header text-center h3">Total Letters of Approval Already Signed by
+                                    Lecturer</div>
+                                <div class="card-body">
+                                    <p class="display-4 text-center mb-0 py-1">
+                                        <%= acceptedLettersOfApproval %>
+                                    </p>
+                                </div>
+                                <div class="card-footer"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <%- include("../partials/footerLecturers") %>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

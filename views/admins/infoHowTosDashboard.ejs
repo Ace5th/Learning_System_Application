@@ -1,0 +1,84 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title">INFO | GUIDE</h1>
+    <a href="/admin/info-howtos/add-howto" class="btn btn-sm btn-secondary mb-2">Add Guide</a>
+
+    <h2>Audience: Student</h2>
+    <table class="table table-striped-columns table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Content</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let howto of howtos) { %>
+                <% if (howto.audience=="Student" ) { %>
+                    <tr>
+                        <th scope="row">
+                            <%= howto.title %>
+                        </th>
+                        <td>
+                            <%= howto.content %>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    &#8226;&#8226;&#8226;
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" href="/admin/info-howtos/<%= howto.id %>">Open</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="/admin/info-howtos/<%= howto.id %>/edit-howto">Edit</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="/admin/info-howtos/<%= howto.id %>/delete-howto">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <% } %>
+                        <% } %>
+        </tbody>
+    </table>
+
+    <h2>Audience: Lecturer</h2>
+    <table class="table table-striped-columns table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Content</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let howto of howtos) { %>
+                <% if (howto.audience=="Lecturer" ) { %>
+                    <tr>
+                        <th scope="row">
+                            <%= howto.title %>
+                        </th>
+                        <td>
+                            <%= howto.content %>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    &#8226;&#8226;&#8226;
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark">
+                                    <li><a class="dropdown-item" href="/admin/info-howtos/<%= howto.id %>">Open</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="/admin/info-howtos/<%= howto.id %>/edit-howto">Edit</a></li>
+                                    <li><a class="dropdown-item"
+                                            href="/admin/info-howtos/<%= howto.id %>/delete-howto">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <% } %>
+                        <% } %>
+        </tbody>
+    </table>

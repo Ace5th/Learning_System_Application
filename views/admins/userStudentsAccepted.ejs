@@ -1,0 +1,43 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title">ACCEPTED STUDENTS</h1>
+    <a href="/admin/user-students" class="btn btn-sm btn-secondary mb-4">&larr; Previous Page</a>
+
+    <table class="table table-striped-columns table-hover">
+        <thead>
+            <tr>
+                <th scope="col">NIM</th>
+                <th scope="col">Name</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let student of acceptedStudents) { %>
+                <tr>
+                    <th scope="row">
+                        <%= student.username %>
+                    </th>
+                    <td>
+                        <%= student.name %>
+                    </td>
+                    <td>
+                        <%= student.email %>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                &#8226;&#8226;&#8226;
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="/admin/user-students/<%=student._id%>">Open</a></li>
+                                <li><a class="dropdown-item"
+                                        href="/admin/user-students/<%=student._id%>/delete-student">Delete</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>

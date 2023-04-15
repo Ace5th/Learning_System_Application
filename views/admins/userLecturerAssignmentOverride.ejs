@@ -1,0 +1,54 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card text-center">
+                <div class="card-header">
+                    ACCEPT ASSIGNMENT
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Are you sure?</h5>
+                    <p class="card-text">Doing this will enable the student's ability to edit or update their assignment
+                        once: <%= assignment.title %> <strong>by</strong>
+                            <%= assignment.author.username %> | <%= assignment.author.name %>
+                    </p>
+                    <p class="card-text">
+                        Only do this if one of the lecturers has not sent their review yet. This is done to prevent the
+                        lecturer from redoing their review: <br>
+                        - 1<sup>st</sup> supervisor's status: <%= assignment.statusOfFirstLecturer.code %> <br>
+                            - 2<sup>nd</sup> supervisor's status: <%= assignment.statusOfSecondLecturer.code %> <br>
+                    </p>
+                    <form
+                        action="/admin/user-lecturers/<%= lecturer._id %>/assignment/<%= assignment._id %>/override-assignment?_method=PUT"
+                        method="POST" class="validated-form" novalidate>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="overrideStatus">Override Status</label>
+                            <select class="form-select" id="overrideStatus" name="assignment[override]">
+                                <% if (assignment.override==true) {%>
+                                    <option value="<%= assignment.override %>" selected>
+                                        Enabled
+                                    </option>
+                                    <% } else if (assignment.override==false) {%>
+                                        <option value="<%= assignment.override %>" selected>
+                                            Disabled
+                                        </option>
+                                        <% } %>
+                                            <option value="true">Enable</option>
+                                            <option value="false">Disable</option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-secondary">Press this button to confirm your choice</button>
+                        </div>
+                    </form>
+                    <a class="btn btn-sm btn-secondary mt-3 mx-3" onclick="history.back()">&larr;
+                        Previous Page</a>
+                </div>
+                <div class="card-footer text-muted">
+                </div>
+            </div>
+        </div>
+    </div>

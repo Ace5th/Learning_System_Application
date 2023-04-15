@@ -1,0 +1,96 @@
+<% layout("layouts/boilerplateStudents") %>
+
+    <h1 class="page-title">
+        ASSIGNMENT
+    </h1>
+
+    <div class="row mt-5">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow mb-3 py-2">
+                <h2 class="ps-3">Detail</h2>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <label class="h5" for="author">Author</label>
+                    <div class="card p-2 mb-3">
+                        <p class="card-text mb-0" id="author">
+                            <%= student.username %> | <%= student.name %> | <%= student.department %>
+                        </p>
+                    </div>
+                    <label class="h5" for="title">Title</label>
+                    <div class="card p-2 mb-3">
+                        <p class="card-text mb-0" id="title">
+                            <%= assignment.title %>
+                        </p>
+                    </div>
+                    <div class="d-flex">
+                        <div class="col-md-5 me-4">
+                            <label class="h5" for="phase">Phase</label>
+                            <div class="card p-2 mb-3">
+                                <p class="card-text mb-0" id="phase">
+                                    <%= assignment.phase %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-5 me-4">
+                            <label class="h5" for="status">Status</label>
+                            <div class="card p-2 mb-3">
+                                <p class="card-text mb-0" id="status">
+                                    <%= assignment.status %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <label class="h5" for="content">Content</label>
+                    <div class="card p-2 mb-3">
+                        <p class="card-text mb-0" id="content">
+                            <%= assignment.content.originalname %>
+                    </div>
+                    <div class="d-flex">
+                        <div class="col-md-3 me-5">
+                            <label class="h5" for="time-created">Time Created</label>
+                            <div class="card p-2 mb-3">
+                                <p class="card-text mb-0" id="time-created">
+                                    <%= assignment.time.createdOn.toLocaleDateString() %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 me-5">
+                            <label class="h5" for="time-updated">Time Updated</label>
+                            <div class="card p-2 mb-3">
+                                <p class="card-text mb-0" id="time-updated">
+                                    <%= assignment.time.updatedOn.toLocaleDateString() %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 me-5">
+                            <label class="h5" for="deadline">Deadline</label>
+                            <div class="card p-2 mb-3">
+                                <p class="card-text mb-0" id="deadline">
+                                    <% if (assignment.status=="Under Review by Lecturers" ) { %>
+                                        Lecturer(s) |
+                                        <% } else { %>
+                                            Student |
+                                            <% } %>
+                                                <%= assignment.time.expiresOn.toLocaleDateString() %> <strong>(<%=
+                                                            assignment.elapsedTimeDay %> Days
+                                                            Left)</strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <% if (assignment.status=="Under Editing by Student" || assignment.override==true) { %>
+                        <a class="btn btn-sm btn-secondary mt-3 mx-1"
+                            href="/student/assignment/<%= assignment._id %>/edit-assignment">Update</a>
+                        <% } %>
+                            <a class="btn btn-sm btn-secondary mt-3 mx-1"
+                                href="/student/download-assignment/<%= assignment._id %>">Download
+                                PDF</a>
+                            <a class="btn btn-sm btn-secondary mt-3 mx-1"
+                                href="/student/assignment/<%= assignment._id %>/delete-assignment">Delete</a>
+                            <a class="btn btn-sm btn-secondary mt-3 mx-3" href="/student">&larr;
+                                Previous Page</a>
+                </div>
+            </div>
+        </div>
+    </div>

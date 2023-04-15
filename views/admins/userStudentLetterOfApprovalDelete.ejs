@@ -1,0 +1,20 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <div class="card text-center">
+        <div class="card-header">
+            DELETE LETTER OF APPROVAL
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Are you sure?</h5>
+            <p class="card-text">Doing this will permanently delete the letter of Approval:
+            </p>
+            <form class="mx-4 delete-user-form"
+                action="/admin/user-students/<%= student._id %>/loa/<%= letterOfApproval._id %>/delete-loa?_method=DELETE" method="POST">
+                <button class="btn btn-secondary">Yes</button>
+            </form>
+            <a href="/admin/user-students/<%= student._id %>/loa/<%= letterOfApproval._id %>"
+                class="btn btn-secondary mx-4">No</a>
+        </div>
+        <div class="card-footer text-muted">
+        </div>
+    </div>

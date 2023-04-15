@@ -1,0 +1,81 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title mb-4">
+        EDIT STUDENT PROFILE
+    </h1>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow mb-3 py-2">
+                <h2 class="text-center mb-1">Edit Student Profile Below</h2>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <form action="/admin/user-students/<%= student._id %>/edit-student?_method=PUT" method="POST"
+                        novalidate class="validated-form">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">NIM</label>
+                            <input type="text" class="form-control" id="username" name="student[username]"
+                                placeholder="NIM" value="<%= student.username %>">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="student[name]" placeholder="Name"
+                                value="<%= student.name %>">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="email" name="student[email]"
+                                placeholder="E-mail" value="<%= student.email %>">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="phone-number">Phone Number</label>
+                            <input class="form-control" type="text" id="phone-number"
+                                value="<%= student.phoneNumber %>" name="student[phoneNumber]" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="department">Department</label>
+                            <select class="form-select" id="department" name="student[department]">
+                                <option value="<%= student.department %>" selected>
+                                    <%= student.department %>
+                                </option>
+                                <% for (let department of departments) { %>
+                                    <option value="<%= department %>">
+                                        <%= department %>
+                                    </option>
+                                    <% } %>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="student[password]"
+                                placeholder="New Password">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-secondary">Edit Student</button>
+                        </div>
+                    </form>
+                    <a class="btn btn-sm btn-secondary mt-3" href="/admin/user-students/<%= student._id %>">&larr;
+                        Previous Page</a>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,63 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title">ADMIN: <%= admin.username %>
+            <div class="dropdown">
+                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    &#8226;&#8226;&#8226;
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li>
+                        <a class="dropdown-item" href="/admin/user-admins/<%= admin._id %>/delete-admin">Delete
+                            Admin</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/admin/user-admins">Previous Page</a>
+                    </li>
+                </ul>
+            </div>
+    </h1>
+
+    <div class="row mt-5">
+        <h4>Profile</h4>
+    </div>
+
+    <table class="table table-striped-columns">
+        <thead>
+            <tr>
+                <th scope="col">NIP</th>
+                <th scope="col">Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">
+                    <%= admin.username %>
+                </th>
+                <td>
+                    <%= admin.name %>
+                </td>
+                <td>
+                    <%= admin.department %>
+                </td>
+                <td>
+                    <%= admin.email %>
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            &#8226;&#8226;&#8226;
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="/admin/user-admins/<%= admin._id %>/edit-admin">Edit</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>

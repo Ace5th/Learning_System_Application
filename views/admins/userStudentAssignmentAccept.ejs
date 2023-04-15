@@ -1,0 +1,44 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card text-center">
+                <div class="card-header">
+                    ACCEPT ASSIGNMENT
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Are you sure?</h5>
+                    <p class="card-text">Doing this will indicate that the lecturer have reviewed and have accepted the
+                        assignment: <%= assignment.title %> <strong>by</strong>
+                            <%= student.username %> | <%= student.name %>
+                    </p>
+                    <form
+                        action="/admin/user-students/<%= student._id %>/assignment/<%= assignment._id %>/accept-assignment?_method=PUT"
+                        method="POST" class="validated-form" novalidate>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="lecturer-select">Accepting Supervisor</label>
+                            <select class="form-select" id="lecturer-select" name="assignment[lecturerId]">
+                                <option selected>Choose...</option>
+                                <option value="<%= student.firstLecturer._id %>">
+                                    <%= student.firstLecturer.username %> | <%= student.firstLecturer.name %>
+                                </option>
+                                <option value="<%= student.secondLecturer._id %>">
+                                    <%= student.secondLecturer.username %> | <%= student.secondLecturer.name %>
+                                </option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-secondary">Accept Assignment</button>
+                        </div>
+                    </form>
+                    <a class="btn btn-sm btn-secondary mt-3 mx-3" onclick="history.back()">&larr;
+                        Previous Page</a>
+                </div>
+                <div class="card-footer text-muted">
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,81 @@
+<% layout("layouts/boilerplateLecturers") %>
+
+    <h1 class="page-title">
+        LETTER OF APPROVAL
+    </h1>
+
+    <div class="row mt-5">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow mb-3 py-2">
+                <h2 class="ps-3">Detail</h2>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <label class="h5" for="author">Author</label>
+                    <div class="card p-2 mb-3">
+                        <p class="card-text mb-0" id="author">
+                            <%= student.username %> | <%= student.name %> | <%= student.department %>
+                        </p>
+                    </div>
+                    <label class="h5" for="status">Status</label>
+                    <div class="card p-2 mb-3">
+                        <p class="card-text mb-0" id="status">
+                            <%= letterOfApproval.status %>
+                        </p>
+                    </div>
+                    <label class="h5" for="file">Content</label>
+                    <div class="card p-2 mb-3">
+                        <p class="card-text mb-0" id="file">
+                            <%= letterOfApproval.file.originalname %>
+                    </div>
+                    <div class="d-flex">
+                        <div class="col-md-3 me-5">
+                            <label class="h5" for="time-created">Time Created</label>
+                            <div class="card p-2 mb-3">
+                                <p class="card-text mb-0" id="time-created">
+                                    <%= letterOfApproval.time.createdOn.toLocaleDateString() %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 me-5">
+                            <label class="h5" for="time-updated">Time Updated</label>
+                            <div class="card p-2 mb-3">
+                                <p class="card-text mb-0" id="time-updated">
+                                    <%= letterOfApproval.time.updatedOn.toLocaleDateString() %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-3 me-5">
+                            <label class="h5" for="deadline">Deadline</label>
+                            <div class="card p-2 mb-3">
+                                <p class="card-text mb-0" id="deadline">
+                                    <% if (letterOfApproval.status=="Waiting for Approval" ) { %>
+                                        Lecturer(s) |
+                                        <% } else { %>
+                                            Student |
+                                            <% } %>
+                                                <%= letterOfApproval.time.expiresOn.toLocaleDateString() %> <strong>(<%=
+                                                            letterOfApproval.elapsedTimeDay %> Days
+                                                            Left)</strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="btn btn-sm btn-secondary mt-3 mx-1"
+                        href="/lecturer/download-loa/<%= letterOfApproval._id %>">Download
+                        PDF</a>
+                    <% if
+                        ((letterOfApproval.statusOfFirstLecturer.lecturer._id.toHexString()==lecturer._id.toHexString()
+                        && letterOfApproval.statusOfFirstLecturer.code!="Approved" ) ||
+                        (letterOfApproval.statusOfSecondLecturer.lecturer._id.toHexString()==lecturer._id.toHexString()
+                        && letterOfApproval.statusOfSecondLecturer.code!="Approved" )) { %>
+                        <a class="btn btn-sm btn-secondary mt-3 mx-1"
+                            href="/lecturer/student/<%= student._id %>/loa/<%= student.letterOfApproval._id %>/sign-loa">Sign</a>
+                        <% } %>
+                            <a class="btn btn-sm btn-secondary mt-3 mx-3"
+                                href="/lecturer/student/<%= student._id %>">&larr;
+                                Previous Page</a>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,48 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title">
+        LETTER OF APPROVAL: <%= student.username %> | <%= student.name %>
+    </h1>
+
+    <div class="row mt-5">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow mb-3 py-2">
+                <h2 class="ps-3">Upload the document that you have signed below</h2>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <form
+                        action="/admin/user-students/<%= student._id %>/loa/<%= letterOfApproval._id %>/sign-loa?_method=PUT"
+                        method="POST" class="validated-form" enctype="multipart/form-data" novalidate>
+                        <div class="mb-3">
+                            <label for="file" class="form-label h5">Add a PDF</label>
+                            <input class="form-control" type="file" id="file" name="file" required>
+                        </div>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="lecturer-select">Signing Supervisor</label>
+                            <select class="form-select" id="lecturer-select" name="lecturer">
+                                <option selected>Choose...</option>
+                                <option value="<%= student.firstLecturer._id %>">
+                                    <%= student.firstLecturer.username %> | <%= student.firstLecturer.name %>
+                                </option>
+                                <option value="<%= student.secondLecturer._id %>">
+                                    <%= student.secondLecturer.username %> | <%= student.secondLecturer.name %>
+                                </option>
+                            </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-secondary">Send Letter of Approval</button>
+                        </div>
+                    </form>
+                    <a class="btn btn-sm btn-secondary mt-3 mx-3" onclick="history.back()">&larr;
+                        Previous Page</a>
+                </div>
+            </div>
+        </div>
+    </div>

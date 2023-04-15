@@ -1,0 +1,17 @@
+.login-logo {
+  padding: 10% 2%;
+  max-width: 80%;
+  height: auto;
+  align-self: center;
+}
+
+.login-card {
+  width: 18rem;
+  height: 40rem;
+  overflow: auto;
+}
+
+#admin-login {
+  height: 37.5rem;
+}
+

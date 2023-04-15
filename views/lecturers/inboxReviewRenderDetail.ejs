@@ -1,0 +1,62 @@
+<% layout("layouts/boilerplateLecturers") %>
+
+    <h1 class="page-title">
+        REVIEW
+    </h1>
+
+    <div class="row mt-5">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow mb-3 py-2">
+                <h2 class="ps-3">Detail</h2>
+            </div>
+            <div class="card shadow">
+                <div class="card-body">
+                    <% for (let data of review.data) { %>
+                        <label class="h5" for="title">Title</label>
+                        <div class="card p-2 mb-3">
+                            <p class="card-text mb-0" id="title">
+                                <%= data.title %>
+                            </p>
+                        </div>
+                        <label class="h5" for="content">Content</label>
+                        <div class="card p-2 mb-3">
+                            <p class="card-text mb-0" id="content">
+                                <%= data.content %>
+                            </p>
+                        </div>
+                        <% } %>
+                            <label class="h5" for="file">File</label>
+                            <div class="card p-2 mb-3">
+                                <p class="card-text mb-0" id="file">
+                                    <%= review.file.originalname %>
+                                </p>
+                            </div>
+                            <label class="h5" for="author">Author</label>
+                            <div class="card p-2 mb-3">
+                                <p class="card-text mb-0" id="author">
+                                    <%= review.author.username %> | <%= review.author.name %> | <%= review.author.department %>
+                                </p>
+                            </div>
+                            <label class="h5" for="time-created">Time Created</label>
+                            <div class="card p-2 mb-3">
+                                <p class="card-text mb-0" id="time-created">
+                                    <%= review.createdOn.toLocaleDateString() %>
+                                </p>
+                            </div>
+                            <% if(assignment.status=="Under Review by Lecturers" ) { %>
+                                <a class="btn btn-sm btn-secondary mt-3 mx-1"
+                                    href="/lecturer/student/<%= student._id %>/assignment/<%= assignment._id %>/review/<%= review._id %>/edit-review">Edit
+                                    Review</a>
+                                <% } %>
+                                    <% if(assignment.review.file) { %>
+                                        <a class="btn btn-sm btn-secondary mt-3 mx-1"
+                                            href="/lecturer/download-review/<%= review._id %>">Download
+                                            PDF</a>
+                                        <% } %>
+                                            <a class="btn btn-sm btn-secondary mt-3 mx-3"
+                                                href="/inbox/student/<%= student._id %>/assignment/<%= assignment._id %>/reviews">&larr;
+                                                Previous Page</a>
+                </div>
+            </div>
+        </div>
+    </div>

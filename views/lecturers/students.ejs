@@ -1,0 +1,71 @@
+<% layout("layouts/boilerplateLecturers") %>
+
+    <h1 class="page-title">
+        My Students
+    </h1>
+
+    <table class="table table-striped-columns mt-4">
+        <thead>
+            <tr>
+                <th scope="col">NIM</th>
+                <th scope="col">NAME</th>
+                <th scope="col">DEPARTMENT</th>
+                <th scope="col">E-MAIL</th>
+                <th scope="col">PHONE NUMBER</th>
+                <th scope="col">SUPERVISORS</th>
+                <th scope="col">ACTIONS</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let student of students) { %>
+                <tr>
+                    <th scope="row">
+                        <%= student.username %>
+                    </th>
+                    <td>
+                        <%= student.name %>
+                    </td>
+                    <td>
+                        <%= student.department %>
+                    </td>
+                    <td>
+                        <%= student.email %>
+                    </td>
+                    <td>
+                        <%= student.phoneNumber %>
+                    </td>
+                    <td>
+                        <ul>
+                            <% if (student.firstLecturer !=undefined) { %>
+                                <li>
+                                    <strong>1<sup>ST</sup> SUPERVISOR:</strong> <br>
+                                    <%= student.firstLecturer.username %> | <%= student.firstLecturer.name %> | <%=
+                                                student.firstLecturer.email %> | <%= student.firstLecturer.department %>
+                                </li>
+                                <% } %>
+                                    <% if (student.secondLecturer !=undefined) { %>
+                                        <li>
+                                            <strong>2<sup>ND</sup> SUPERVISOR:</strong> <br>
+                                            <%= student.secondLecturer.username %> | <%= student.secondLecturer.name %>
+                                                    | <%= student.secondLecturer.email %> | <%=
+                                                            student.secondLecturer.department %>
+                                        </li>
+                                        <% } %>
+                        </ul>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                &#8226;&#8226;&#8226;
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="/lecturer/student/<%= student._id %>">Detail</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>

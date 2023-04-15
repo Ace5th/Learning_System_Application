@@ -1,0 +1,39 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark ">
+    <div class="container">
+        <a class="navbar-brand" href="/admin">SISTA</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/admin">DASHBOARD</a>
+            </div>
+            <div class="dropdown ms-5">
+                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    USER
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/admin/user-students">Students</a></li>
+                    <li><a class="dropdown-item" href="/admin/user-lecturers">Lecturers</a></li>
+                    <li><a class="dropdown-item" href="/admin/user-admins">Admins</a></li>
+                </ul>
+            </div>
+            <div class="dropdown ms-5">
+                <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    INFO
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/admin/info-howtos">How To</a></li>
+                    <li><a class="dropdown-item" href="/admin/info-faqs">Faqs</a></li>
+                </ul>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link me-3" href="/admin/setting">SETTINGS</a>
+                <a class="nav-link" href="/logout-admin">LOGOUT</a>
+            </div>
+        </div>
+    </div>
+</nav>

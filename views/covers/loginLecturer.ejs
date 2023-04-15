@@ -1,0 +1,40 @@
+<% layout("layouts/boilerplateCovers") %>
+
+    <div class="container d-flex justify-content-center align-items-center my-5">
+        <div class="row">
+            <div class="col-md-6 col-xl-4">
+                <div class="card shadow login-card">
+                    <div class="login-logo">
+                        <img class="card-img-top"
+                            src="https://kompaspedia.kompas.id/wp-content/uploads/2020/08/logo_Universitas-Hasanudin.png"
+                            alt="">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="text-center">Lecturer Login</h5>
+                        <form action="/login-lecturer" method="POST" class="mb-4 validated-form" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label" for="username">NIP</label>
+                                <input class="form-control" type="text" id="username" name="username" autofocus
+                                    required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="password">PASSWORD</label>
+                                <input class="form-control" type="password" id="password" name="password" required>
+                            </div>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <button class="btn btn-success btn-block">Login</button>
+                        </form>
+                        <div class="btn-group">
+                            <a href="/login-student" class="btn btn-primary">Student</a>
+                            <a href="/login-lecturer" class="btn btn-primary active" aria-current="page">Lecturer</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

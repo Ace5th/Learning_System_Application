@@ -1,0 +1,141 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title display-4 fw-semibold">ADMIN DASHBOARD | <%= admin.department.toUpperCase() %>
+    </h1>
+
+    <div class="row mt-5">
+        <div class="col-md-10 offset-md-1">
+            <div class="card shadow mb-2 py-1 text-bg-dark">
+                <h3 class="ps-3 py-1">MY PROFILE</h3>
+            </div>
+
+            <div class="card shadow mb-3">
+                <div class="card-body row">
+                    <div class="col-md-6 mb-4">
+                        <label class="h4" for="admin-username">NIP</label>
+                        <div class="card">
+                            <p class="card-text profile-label p-1" id="admin-username">
+                                <%= admin.username %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <label class="h4" for="admin-name">NAME</label>
+                        <div class="card">
+                            <p class="card-text profile-label p-1" id="admin-name">
+                                <%= admin.name %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="h4" for="admin-email">E-MAIL</label>
+                        <div class="card">
+                            <p class="card-text profile-label p-1" id="admin-email">
+                                <%= admin.email %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="h4" for="admin-department">DEPARTMENT</label>
+                        <div class="card">
+                            <p class="card-text profile-label p-1" id="admin-department">
+                                <%= admin.department %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mb-5">
+        <hr>
+        <h1>STATISTICS</h1>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="card shadow col-md-3 p-0 mb-5 mx-3">
+            <div class="card-header text-center h3">Total Students</div>
+            <div class="card-body">
+                <p class="display-1 text-center py-5">
+                    <%= students.length %>
+                </p>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+        <div class="card shadow col-md-3 p-0 mb-5 mx-3">
+            <div class="card-header text-center h5">Total Students Without Supervisors (Unassigned)</div>
+            <div class="card-body">
+                <p class="display-1 text-center py-5">
+                    <%= unassignedStudents %>
+                </p>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+        <div class="card shadow col-md-3 p-0 mb-5 mx-3">
+            <div class="card-header text-center h3">Total Lecturers</div>
+            <div class="card-body">
+                <p class="display-1 text-center py-5">
+                    <%= lecturers.length %>
+                </p>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+        <div class="card shadow col-md-3 p-0 mb-5 mx-3">
+            <div class="card-header text-center h3">Total Admins</div>
+            <div class="card-body">
+                <p class="display-1 text-center py-5">
+                    <%= admins.length %>
+                </p>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+        <div class="card shadow col-md-3 p-0 mb-5 mx-3">
+            <div class="card-header text-center h3">Total Reviews</div>
+            <div class="card-body">
+                <p class="display-1 text-center py-5">
+                    <%= totalReviews %>
+                </p>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+        <div class="card shadow col-md-3 p-0 mb-5 mx-3">
+            <div class="card-header text-center h3">Total Assignments</div>
+            <div class="card-body">
+                <p class="display-1 text-center py-5">
+                    <%= totalAssignments %>
+                </p>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+        <div class="card shadow col-md-3 p-0 mb-5 mx-3">
+            <div class="card-header text-center h3">Total Pending Assignments</div>
+            <div class="card-body">
+                <p class="display-1 text-center py-5">
+                    <%= pendingAssignments %>
+                </p>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+        <div class="card shadow col-md-3 p-0 mb-5 mx-3">
+            <div class="card-header text-center h3">Total Reviewed Assignments</div>
+            <div class="card-body">
+                <p class="display-1 text-center py-5">
+                    <%= reviewedAssignments %>
+                </p>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+        <div class="card shadow col-md-3 p-0 mb-5 mx-3">
+            <div class="card-header text-center h3">Total Accepted Assignments</div>
+            <div class="card-body">
+                <p class="display-1 text-center py-5">
+                    <%= acceptedAssignments %>
+                </p>
+            </div>
+            <div class="card-footer"></div>
+        </div>
+    </div>

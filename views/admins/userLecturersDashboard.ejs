@@ -1,0 +1,52 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <h1 class="page-title">USER | LECTURERS</h1>
+    <a href="/admin/user-lecturers/add-lecturer" class="btn btn-sm btn-secondary mb-2">Add Lecturer</a>
+
+    <table class="table table-striped-columns table-hover">
+        <thead>
+            <tr>
+                <th scope="col">NIP</th>
+                <th scope="col">Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">E-mail</th>
+                <th scope="col">Students</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (let lecturer of lecturers) { %>
+                <tr>
+                    <th scope="row">
+                        <%= lecturer.username %>
+                    </th>
+                    <td>
+                        <%= lecturer.name %>
+                    </td>
+                    <td>
+                        <%= lecturer.department %>
+                    </td>
+                    <td>
+                        <%= lecturer.email %>
+                    </td>
+                    <td>
+                        <%= lecturer.students.length %>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                &#8226;&#8226;&#8226;
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <li><a class="dropdown-item" href="/admin/user-lecturers/<%=lecturer._id%>">Open</a>
+                                </li>
+                                <li><a class="dropdown-item"
+                                        href="/admin/user-lecturers/<%=lecturer._id%>/delete-lecturer">Delete</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <% } %>
+        </tbody>
+    </table>

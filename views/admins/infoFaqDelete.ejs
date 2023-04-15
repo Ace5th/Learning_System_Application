@@ -1,0 +1,19 @@
+<% layout("layouts/boilerplateAdmins") %>
+
+    <div class="card text-center">
+        <div class="card-header">
+            DELETE
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Are you sure?</h5>
+            <p class="card-text">Doing this will permanently delete the faq
+            </p>
+            <form class="mx-4 delete-user-form" action="/admin/info-faqs/<%= faq.id %>/delete-faq?_method=DELETE"
+                method="POST">
+                <button class="btn btn-secondary">Yes</button>
+            </form>
+            <a href="/admin/info-faqs/<%= faq._id %>" class="btn btn-secondary mx-4">No</a>
+        </div>
+        <div class="card-footer text-muted">
+        </div>
+    </div>
